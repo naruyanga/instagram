@@ -1,4 +1,4 @@
-const { Schema, mongoose } = require("mongoose");
+const { Schema, default: mongoose } = require("mongoose");
 
 const userSchema = new Schema(
   {
@@ -6,7 +6,9 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     email: { type: String, required: true },
     profileImage: { type: String },
-    postId: { type: mongoose.Types.ObjectId, ref: "post", required: true },
+    posts: [{ type: mongoose.Types.ObjectId, ref: "Post" }],
+    followers: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+    following: [{ type: mongoose.Types.ObjectId, ref: "User" }],
   },
   { timestampes: true }
 );
